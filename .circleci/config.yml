@@ -16,7 +16,9 @@ jobs:
       - checkout
       - run: |
           npm install
-          npm start:dev
+          prisma generate
+          nest build
+          node dist/main
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
