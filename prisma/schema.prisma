@@ -21,9 +21,8 @@ model Card{
 model Purchases{
   id                Int     @default(autoincrement()) @id
   name              String 
-  limit             Float
-  startDate         Int
-  installmentValue  Int
+  startDate         String
+  installmentValue  Float
   installmentAmount Int
   cardId            Int
   card              Card @relation(fields: [cardId], references: [id])
