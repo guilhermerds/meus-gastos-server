@@ -1,15 +1,16 @@
 version: "3.9"
 services: 
   meus-gastos-database:
-    image: mysql:8.0
+    image: postgres:14
     container_name: meus-gastos-database
     volumes: 
-      - ./mysql:/var/lib/mysql 
+      - ./postgres:/var/lib/postgres 
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: meus-gastos
+      POSTGRES_USER: gui
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: meus-gastos
     ports:
-      - 3306:3306
+      - 5432:5432
   meus-gastos-server:
     build: . #Ele executa o arquivo Dockerfile que está no mesmo diretório
     container_name: meus-gastos-server
