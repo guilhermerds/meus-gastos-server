@@ -15,15 +15,15 @@ export class CardService {
     return await this.prisma.card.findMany();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return await this.prisma.card.findUnique({where: { id }});
   }
 
-  async update(id: number, updateCardDto: UpdateCardDto) {
+  async update(id: string, updateCardDto: UpdateCardDto) {
     return await this.prisma.card.update({where: {id}, data: updateCardDto});
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return await this.prisma.card.delete({where: {id}});
   }
 }

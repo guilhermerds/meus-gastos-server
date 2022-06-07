@@ -11,11 +11,10 @@ datasource db {
 }
 
 model Card{
-  id            Int     @default(autoincrement()) @id
+  id            String     @default(uuid()) @id
   name          String 
   limit         Float
   expirationDay Int
-  cardNumber    String @default("")
   purchases Purchases[]
 }
 
@@ -25,6 +24,6 @@ model Purchases{
   startDate         String
   installmentValue  Float
   installmentAmount Int
-  cardId            Int
+  cardId            String
   card              Card @relation(fields: [cardId], references: [id])
 }
