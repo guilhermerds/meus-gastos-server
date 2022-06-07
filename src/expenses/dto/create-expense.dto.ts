@@ -3,5 +3,5 @@ export class CreateExpenseDto {
     startDate:         string
     installmentValue:  number
     installmentAmount: number
-    cardId:            number
+    cardId:            string
 }
