@@ -15,6 +15,7 @@ model Card{
   name          String 
   limit         Float
   expirationDay Int
+  cardNumber    String @default("")
   purchases Purchases[]
 }
 
