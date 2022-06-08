@@ -24,6 +24,6 @@ model Purchases{
   startDate         String
   installmentValue  Float
   installmentAmount Int
-  cardId            String
-  card              Card @relation(fields: [cardId], references: [id])
+  cardId            String?
+  card              Card? @relation(fields: [cardId], references: [id], onDelete: SetNull)
 }
