@@ -15,15 +15,19 @@ export class CardService {
     return await this.prisma.card.findMany();
   }
 
-  async findOne(id: string) {
+  async findAllRecursive(){
+    return await this.prisma.card.findMany({ include: {purchases: { include: { installments: true }}}});
+  }
+
+  async findOne(id: number) {
     return await this.prisma.card.findUnique({where: { id }});
   }
 
-  async update(id: string, updateCardDto: UpdateCardDto) {
+  async update(id: number, updateCardDto: UpdateCardDto) {
     return await this.prisma.card.update({where: {id}, data: updateCardDto});
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     return await this.prisma.card.delete({where: {id}});
   }
 }

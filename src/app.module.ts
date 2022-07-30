@@ -5,9 +5,10 @@ import { PrismaService } from './prisma.service';
 import { ExpensesModule } from './expenses/expenses.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { InstallmentModule } from './installment/installment.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),CardModule, ExpensesModule],
+  imports: [ConfigModule.forRoot(),CardModule, ExpensesModule, InstallmentModule],
   controllers: [AppController],
   providers: [PrismaService, AppService],
 })

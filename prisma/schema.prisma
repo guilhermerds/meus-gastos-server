@@ -10,20 +10,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Card{
-  id            String     @default(uuid()) @id
-  name          String 
+model Card {
+  id            Int      @id @default(autoincrement())
+  name          String
   limit         Float
   expirationDay Int
-  purchases Purchases[]
+  purchases     Purchases[]
 }
 
-model Purchases{
-  id                Int     @default(autoincrement()) @id
-  name              String 
-  startDate         String
-  installmentValue  Float
-  installmentAmount Int
-  cardId            String?
-  card              Card? @relation(fields: [cardId], references: [id], onDelete: SetNull)
+model Purchases {
+  id                Int           @id @default(autoincrement())
+  name              String
+  cardId            Int?
+  card              Card?         @relation(fields: [cardId], references: [id], onDelete: SetNull)
+  installments       Installment[]
+}
+
+model Installment {
+  id         Int        @id @default(autoincrement())
+  month      DateTime
+  value      Float
+  itsPaid    Boolean
+  purchaseId Int
+  purchase   Purchases? @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+
 }

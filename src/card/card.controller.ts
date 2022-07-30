@@ -17,18 +17,23 @@ export class CardController {
     return this.cardService.findAll();
   }
 
+  @Get('recursive')
+  findAllRecursive() {
+    return this.cardService.findAllRecursive();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.cardService.findOne(id);
+    return this.cardService.findOne(parseInt(id));
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCardDto: UpdateCardDto) {
+  update(@Param('id') id: number, @Body() updateCardDto: UpdateCardDto) {
     return this.cardService.update(id, updateCardDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.cardService.remove(id);
   }
 }
