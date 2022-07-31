@@ -22,7 +22,7 @@ model Purchases {
   id                Int           @id @default(autoincrement())
   name              String
   cardId            Int?
-  card              Card?         @relation(fields: [cardId], references: [id], onDelete: SetNull)
+  card              Card?         @relation(fields: [cardId], references: [id], onDelete: Cascade)
   installments       Installment[]
 }
 
