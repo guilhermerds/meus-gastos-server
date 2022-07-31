@@ -28,12 +28,12 @@ export class CardController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateCardDto: UpdateCardDto) {
-    return this.cardService.update(id, updateCardDto);
+  update(@Param('id') id: string, @Body() updateCardDto: UpdateCardDto) {
+    return this.cardService.update(parseInt(id), updateCardDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.cardService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.cardService.remove(parseInt(id));
   }
 }

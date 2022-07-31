@@ -22,6 +22,11 @@ export class ExpensesController {
     return this.expensesService.findOne(+id);
   }
 
+  @Get(':id/installment')
+  findOneWithInstallment(@Param('id') id: string) {
+    return this.expensesService.findOneWithInstallment(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateExpenseDto: UpdateExpenseDto) {
     return this.expensesService.update(+id, updateExpenseDto);

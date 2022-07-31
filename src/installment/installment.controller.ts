@@ -24,7 +24,7 @@ export class InstallmentController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateInstallmentDto: UpdateInstallmentDto) {
-    return this.installmentService.update(+id, updateInstallmentDto);
+    return this.installmentService.update(parseInt(id), updateInstallmentDto);
   }
 
   @Delete(':id')

@@ -21,7 +21,9 @@ export class InstallmentService {
   }
 
   update(id: number, updateInstallmentDto: UpdateInstallmentDto) {
-    updateInstallmentDto.month = new Date(updateInstallmentDto.month);
+    if( updateInstallmentDto.month)
+      updateInstallmentDto.month = new Date(updateInstallmentDto.month);
+    
     return this.prisma.installment.update({where: { id }, data: updateInstallmentDto});
   }
 

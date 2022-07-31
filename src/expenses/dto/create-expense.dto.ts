@@ -1,4 +1,4 @@
 export class CreateExpenseDto {
-    name:              string
-    cardId:            string
+    name:   string
+    cardId: number
 }

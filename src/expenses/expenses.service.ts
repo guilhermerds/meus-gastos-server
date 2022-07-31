@@ -8,7 +8,7 @@ export class ExpensesService {
   constructor(private readonly prisma: PrismaService){}
 
   async create(createExpenseDto: CreateExpenseDto) {
-    return await this.prisma.purchases.create({data :createExpenseDto});
+    return await this.prisma.purchases.create({data: createExpenseDto});
   }
 
   async findAll() {
@@ -17,6 +17,10 @@ export class ExpensesService {
 
   async findOne(id: number) {
     return await this.prisma.purchases.findUnique({where: { id }});
+  }
+
+  async findOneWithInstallment(id: number) {
+    return await this.prisma.purchases.findUnique({where: { id }, include: {installments: true}});
   }
 
   async update(id: number, updateExpenseDto: UpdateExpenseDto) {
