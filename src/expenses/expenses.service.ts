@@ -30,4 +30,8 @@ export class ExpensesService {
   async remove(id: number) {
     return await this.prisma.purchases.delete({where: { id }});
   }
+
+  async removeInstallments(id: number) {
+    return await this.prisma.installment.deleteMany({where: { purchaseId: id }});
+  }
 }

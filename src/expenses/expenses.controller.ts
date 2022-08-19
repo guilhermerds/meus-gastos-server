@@ -36,4 +36,9 @@ export class ExpensesController {
   remove(@Param('id') id: string) {
     return this.expensesService.remove(+id);
   }
+
+  @Delete(':id/installments')
+  removeInstallments(@Param('id') id: string) {
+    return this.expensesService.removeInstallments(+id);
+  }
 }
