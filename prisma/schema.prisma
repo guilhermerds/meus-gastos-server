@@ -18,6 +18,13 @@ model Card {
   purchases     Purchases[]
 }
 
+model Revenue {
+  id      Int      @id @default(autoincrement())
+  name    String
+  value   Float
+  month   DateTime
+}
+
 model Purchases {
   id                Int           @id @default(autoincrement())
   name              String
