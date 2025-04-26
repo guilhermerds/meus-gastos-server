@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "client"
 }
 
 datasource db {
@@ -10,35 +11,93 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Card {
-  id            Int      @id @default(autoincrement())
+model User {
+  id          String   @id @default(uuid())
+  name        String
+  email       String   @unique
+  password    String
+  incomes     Income[]
+  expenses    Expense[]
+  creditCards CreditCard[]
+  categories  Category[]
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String
+  isExpense   Boolean
+  icon        String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expenses    Expense[]
+  incomes     Income[]
+  creditCardPurchases CreditCardPurchase[]
+}
+
+model Income {
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  value       Float
+  date        DateTime
+  received    Boolean
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+model Expense {
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  value       Float
+  date        DateTime
+  paid        Boolean
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+model CreditCard {
+  id            String      @id @default(uuid())
   name          String
   limit         Float
-  expirationDay Int
-  purchases     Purchases[]
+  closingDay    Int
+  dueDay        Int
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  invoices      Invoice[]
 }
 
-model Revenue {
-  id      Int      @id @default(autoincrement())
-  name    String
-  value   Float
-  month   DateTime
+model Invoice {
+  id            String      @id @default(uuid())
+  dueDate         DateTime
+  paid          Boolean
+  creditCardId  String
+  creditCard    CreditCard @relation(fields: [creditCardId], references: [id], onDelete: Cascade)
+  installments  Installment[]
 }
 
-model Purchases {
-  id                Int           @id @default(autoincrement())
-  name              String
-  cardId            Int?
-  card              Card?         @relation(fields: [cardId], references: [id], onDelete: Cascade)
-  installments       Installment[]
-}
 
 model Installment {
-  id         Int        @id @default(autoincrement())
-  month      DateTime
-  value      Float
-  itsPaid    Boolean
-  purchaseId Int
-  purchase   Purchases? @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  id                    String      @id @default(uuid())
+  installmentValue      Float
+  invoiceId             String
+  invoice               Invoice    @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  creditCardPurchaseId  String
+  creditCardPurchase    CreditCardPurchase @relation(fields: [creditCardPurchaseId], references: [id], onDelete: Cascade)
+}
 
+model CreditCardPurchase {
+  id                  String      @id @default(uuid())
+  name                String
+  description         String?
+  value               Float
+  purchaseDate        DateTime
+  installmentsNumber  Int
+  categoryId          String
+  category            Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  installments        Installment[]
 }
