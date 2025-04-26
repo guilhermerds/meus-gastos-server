@@ -9,25 +9,25 @@ export class InstallmentService {
 
   create(createInstallmentDto: CreateInstallmentDto) {
     createInstallmentDto.month = new Date(createInstallmentDto.month);
-    return this.prisma.installment.create({data: createInstallmentDto});
+    // return this.prisma.installment.create({data: createInstallmentDto});
   }
 
   findAll() {
-    return this.prisma.installment.findMany({ orderBy: { month: 'asc' }});
+    // return this.prisma.installment.findMany({ orderBy: { month: 'asc' }});
   }
 
   findOne(id: number) {
-    return this.prisma.installment.findUnique({where: { id }});
+    // return this.prisma.installment.findUnique({where: { id }});
   }
 
   update(id: number, updateInstallmentDto: UpdateInstallmentDto) {
     if( updateInstallmentDto.month)
       updateInstallmentDto.month = new Date(updateInstallmentDto.month);
     
-    return this.prisma.installment.update({where: { id }, data: updateInstallmentDto});
+    // return this.prisma.installment.update({where: { id }, data: updateInstallmentDto});
   }
 
   remove(id: number) {
-    return this.prisma.installment.delete({where: { id }});
+    // return this.prisma.installment.delete({where: { id }});
   }
 }

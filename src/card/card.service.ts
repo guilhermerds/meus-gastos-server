@@ -5,29 +5,34 @@ import { UpdateCardDto } from './dto/update-card.dto';
 
 @Injectable()
 export class CardService {
-  constructor(private readonly prisma: PrismaService){}
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createCardDto: CreateCardDto) {
-    return await this.prisma.card.create({data: createCardDto});
+    // return await this.prisma.creditCard.create({ data: createCardDto });
   }
 
   async findAll() {
-    return await this.prisma.card.findMany();
+    // return await this.prisma.creditCard.findMany();
   }
 
-  async findAllRecursive(){
-    return await this.prisma.card.findMany({ include: {purchases: { include: { installments: true }}}});
+  async findAllRecursive() {
+    // return await this.prisma.creditCard.findMany({
+    //   include: { purchases: { include: { installments: true } } },
+    // });
   }
 
   async findOne(id: number) {
-    return await this.prisma.card.findUnique({where: { id }});
+    // return await this.prisma.creditCard.findUnique({ where: { id } });
   }
 
   async update(id: number, updateCardDto: UpdateCardDto) {
-    return await this.prisma.card.update({where: {id}, data: updateCardDto});
+    // return await this.prisma.creditCard.update({
+    //   where: { id },
+    //   data: updateCardDto,
+    // });
   }
 
   async remove(id: number) {
-    return await this.prisma.card.delete({where: {id}});
+    // return await this.prisma.creditCard.delete({ where: { id } });
   }
 }

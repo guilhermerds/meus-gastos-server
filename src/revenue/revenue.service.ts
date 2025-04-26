@@ -9,25 +9,25 @@ export class RevenueService {
 
   async create(createRevenueDto: CreateRevenueDto) {
     createRevenueDto.month = new Date(createRevenueDto.month);
-    return await this.prisma.revenue.create({data: createRevenueDto});
+    // return await this.prisma.revenue.create({data: createRevenueDto});
   }
 
   async findAll() {
-    return await this.prisma.revenue.findMany();
+    // return await this.prisma.revenue.findMany();
   }
 
   async findOne(id: number) {
-    return await this.prisma.revenue.findUnique({where: { id }});
+    // return await this.prisma.revenue.findUnique({where: { id }});
   }
 
   async update(id: number, updateRevenueDto: UpdateRevenueDto) {
     if( updateRevenueDto.month)
       updateRevenueDto.month = new Date(updateRevenueDto.month);
       
-    return await this.prisma.revenue.update({where: { id }, data: updateRevenueDto});
+    // return await this.prisma.revenue.update({where: { id }, data: updateRevenueDto});
   }
 
   async remove(id: number) {
-    return await this.prisma.revenue.delete({where: { id }});
+    // return await this.prisma.revenue.delete({where: { id }});
   }
 }
